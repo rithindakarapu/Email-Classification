@@ -14,8 +14,11 @@ export default function Home() {
   const fetchEmails = async () => {
     setError(null);
     try {
-      const response = await fetch(`/api/emails?count=${emailCount}`);
+      const response = await fetch(`/api/emails?count=${emailCount}`); // Add backticks for template literal
       const data = await response.json();
+  
+      console.log("Response Data:", data); // Log the response data
+  
       if (Array.isArray(data)) {
         setEmails(data);
         setShowClassifications(false);
@@ -23,9 +26,12 @@ export default function Home() {
         setError('Unexpected response format');
       }
     } catch (error) {
+      console.error("Fetch Error:", error); // Log the error
       setError(error.message);
     }
   };
+  
+  
 
   const classifyEmails = async () => {
     try {
